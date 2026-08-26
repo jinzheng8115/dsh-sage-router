@@ -1,0 +1,63 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      harness_smoke:
+        description: Run the real-model Harness smoke against the configured profile
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+jobs:
+  typescript:
+    name: TypeScript plugin
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: packages/dsh-sage-router/pnpm-lock.yaml
+      - name: Install plugin dependencies
+        run: pnpm --dir packages/dsh-sage-router install --frozen-lockfile
+      - name: Build, typecheck, and test plugin
+        run: pnpm --dir packages/dsh-sage-router run check
+      - name: Verify package contents
+        run: pnpm --dir packages/dsh-sage-router pack --dry-run
+      - name: Check whitespace
+        run: git diff --check
+
+  harness-smoke:
+    name: Fixed Harness smoke
+    if: github.event_name == 'workflow_dispatch' && inputs.harness_smoke == true
+    runs-on: ubuntu-latest
+    env:
+      SAGE_DSH_VERSION: 0.1.1-rc.2
+      SAGE_DSH_PROFILE: headless
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - name: Install pinned Harness CLI
+        run: npm install --global "@deepseek-ai/dsh@${SAGE_DSH_VERSION}"
+      - name: Install plugin dependencies
+        run: pnpm --dir packages/dsh-sage-router install --frozen-lockfile
+      - name: Build plugin
+        run: pnpm --dir packages/dsh-sage-router build
+      - name: Install bundle and run real smoke
+        run: pnpm --dir packages/dsh-sage-router run smoke:harness

@@ -1,0 +1,31 @@
+# Safe route-only bundle defaults. Replace only the declared Agent metadata
+# with the provider/model catalog used by the target Harness profile.
+- insert:
+    - id: sage-router
+      name: '@sprix-ai/dsh-sage-router'
+      config:
+        agents:
+          - agentId: self
+            provider: local
+            subagentProvider: spawn
+            skills:
+              general: 0.8
+            cost: 0.08
+            latencyMs: 1000
+            permissions: []
+          - agentId: helper
+            provider: local
+            subagentProvider: spawn
+            skills:
+              general: 0.7
+            cost: 0.08
+            latencyMs: 1000
+            permissions: []
+        incumbentId: self
+        maxCollaborators: 2
+        beamWidth: 8
+        exploration: false
+        autoOrchestrate: false
+        maxDelegationDepth: 1
+        defaultBudget: 0.3
+        defaultDeadlineMs: 4000

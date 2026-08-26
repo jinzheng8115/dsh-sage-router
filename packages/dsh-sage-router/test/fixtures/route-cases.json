@@ -1,0 +1,86 @@
+[
+  {
+    "name": "easy-self",
+    "agents": [
+      {
+        "agentId": "current",
+        "skills": { "writing": 0.94 },
+        "cost": 0.02,
+        "latencyMs": 300
+      },
+      {
+        "agentId": "peer",
+        "skills": { "writing": 0.97 },
+        "cost": 0.8,
+        "latencyMs": 500
+      }
+    ],
+    "incumbentId": "current",
+    "task": {
+      "taskId": "easy-fixture",
+      "requirements": [{ "name": "writing", "minimum": 0.6 }],
+      "budget": 0.5,
+      "deadlineMs": 2000
+    },
+    "expectedMode": "self",
+    "expectedAgents": ["current"]
+  },
+  {
+    "name": "specialist-handoff",
+    "agents": [
+      {
+        "agentId": "current",
+        "skills": { "security": 0.12 },
+        "cost": 0.02,
+        "latencyMs": 300
+      },
+      {
+        "agentId": "specialist",
+        "skills": { "security": 0.99 },
+        "cost": 0.05,
+        "latencyMs": 450
+      }
+    ],
+    "incumbentId": "current",
+    "task": {
+      "taskId": "audit-fixture",
+      "requirements": [{ "name": "security", "minimum": 0.8 }],
+      "budget": 0.2,
+      "deadlineMs": 2000,
+      "progress": 0.05
+    },
+    "expectedMode": "handoff",
+    "expectedAgents": ["specialist"]
+  },
+  {
+    "name": "complementary-collaboration",
+    "agents": [
+      {
+        "agentId": "current",
+        "skills": { "planning": 0.96, "coding": 0.12 },
+        "cost": 0.02,
+        "latencyMs": 300
+      },
+      {
+        "agentId": "coder",
+        "skills": { "planning": 0.1, "coding": 0.98 },
+        "cost": 0.03,
+        "latencyMs": 400
+      }
+    ],
+    "incumbentId": "current",
+    "task": {
+      "taskId": "feature-fixture",
+      "requirements": [
+        { "name": "planning", "weight": 0.5, "minimum": 0.75 },
+        { "name": "coding", "weight": 0.5, "minimum": 0.75 }
+      ],
+      "budget": 0.2,
+      "deadlineMs": 2000,
+      "progress": 0.55,
+      "coordinationOverhead": 0.02
+    },
+    "expectedMode": "collaborate",
+    "expectedAgents": ["coder", "current"]
+  }
+]
