@@ -1,5 +1,5 @@
 {
-  "name": "@pinkcobain/dsh-sage-router",
+  "name": "@kingjazz/dsh-sage-router",
   "version": "0.1.0",
   "description": "SAGE routing as a DeepSeek Harness plugin: progress-aware SELF/HANDOFF/COLLABORATE routing and task-DAG scheduling for A2A agent networks",
   "license": "MIT",

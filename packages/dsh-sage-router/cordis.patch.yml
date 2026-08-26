@@ -2,7 +2,7 @@
 # with the provider/model catalog used by the target Harness profile.
 - insert:
     - id: sage-router
-      name: '@pinkcobain/dsh-sage-router'
+      name: '@kingjazz/dsh-sage-router'
       config:
         agents:
           - agentId: self
