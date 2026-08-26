@@ -1,7 +1,8 @@
 {
-  "name": "@sprix-ai/dsh-sage-router",
+  "name": "@jinzheng8115/dsh-sage-router",
   "version": "0.1.0",
-  "private": true,
+  "description": "SAGE routing as a DeepSeek Harness plugin: progress-aware SELF/HANDOFF/COLLABORATE routing and task-DAG scheduling for A2A agent networks",
+  "license": "MIT",
   "type": "module",
   "engines": {
     "node": ">=22"
