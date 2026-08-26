@@ -37,7 +37,7 @@ await run(["plugin", "--profile", profile, "add", packageRoot], 120_000);
 const config = await run(["--profile", profile, "--dump-config"]);
 const configText = `${config.stdout}\n${config.stderr}`;
 for (const marker of [
-  "@jinzheng8115/dsh-sage-router",
+  "@pinkcobain/dsh-sage-router",
   "id: sage-router",
   "autoOrchestrate: false",
   "maxDelegationDepth: 1",

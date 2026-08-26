@@ -14,7 +14,7 @@ function readJson(path: string): Record<string, any> {
 test("bundle manifest points to the built ESM entry and patch layer", () => {
   const manifest = readJson(resolve(packageRoot, "package.json"));
 
-  equal(manifest.name, "@jinzheng8115/dsh-sage-router");
+  equal(manifest.name, "@pinkcobain/dsh-sage-router");
   equal(manifest.type, "module");
   equal(manifest.engines.node, ">=22");
   equal(manifest.exports["."].import, "./dist/src/index.js");
@@ -26,7 +26,7 @@ test("bundle manifest points to the built ESM entry and patch layer", () => {
 
   const patch = readFileSync(resolve(packageRoot, "cordis.patch.yml"), "utf8");
   match(patch, /id:\s+sage-router/);
-  match(patch, /name:\s+'@jinzheng8115\/dsh-sage-router'/);
+  match(patch, /name:\s+'@pinkcobain\/dsh-sage-router'/);
   match(patch, /autoOrchestrate:\s+false/);
   match(patch, /maxDelegationDepth:\s+1/);
   match(patch, /defaultBudget:\s+0\.3/);
